@@ -2,8 +2,10 @@ require "rails_helper"
 
 RSpec.feature "Listing Articles", :aggregate_failures do
   before do
-    @article1 = Article.create(title: "First Article", body: "Lorem ipsum dolor sit")
-    @article2 = Article.create(title: "Second Article", body: "Body of second article")
+    @john = User.create!(email: "john@exmaple.com", password: "password")
+    login_as(@john)
+    @article1 = Article.create(title: "First Article", body: "Lorem ipsum dolor sit", user: @john)
+    @article2 = Article.create(title: "Second Article", body: "Body of second article", user: @john)
   end
 
   scenario "a user lists all articles" do
